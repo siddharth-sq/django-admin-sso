@@ -12,7 +12,12 @@ class AssignmentAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         urls = super(AssignmentAdmin, self).get_urls()
-        info = self.model._meta.app_label, self.model._meta.module_name
+        opts = self.model._meta
+        try:
+            #  Django 1.8 only provides model_name
+            info = (opts.app_label, opts.model_name)
+        except AttributeError:
+            info = (opts.app_label, opts.module_name)
         if settings.DJANGO_ADMIN_SSO_USE_OAUTH:
             my_urls = patterns('admin_sso.views',
                 url(r'^start/$', 'start',
