@@ -18,32 +18,16 @@ class AssignmentAdmin(admin.ModelAdmin):
             info = (opts.app_label, opts.model_name)
         except AttributeError:
             info = (opts.app_label, opts.module_name)
-        if settings.DJANGO_ADMIN_SSO_USE_OAUTH:
-            my_urls = patterns('admin_sso.views',
-                url(r'^start/$', 'start',
-                    name='%s_%s_start' % info),
-                url(r'^end/$', 'end',
-                    name='%s_%s_end' % info),
-            )
-        else:
-            from admin_sso.openid.views import StartOpenIDView, FinishOpenIDView
-            my_urls = patterns('',
-                url(r'^start/$', StartOpenIDView.as_view(),
-                    name='%s_%s_start' % info),
-                url(r'^end/$', FinishOpenIDView.as_view(),
-                    name='%s_%s_return' % info),
-            )
-        return my_urls + urls
+
+        return patterns('admin_sso.views',
+            url(r'^start/$', 'start',
+                name='%s_%s_start' % info),
+            url(r'^end/$', 'end',
+                name='%s_%s_end' % info),
+        ) + urls
 
 admin.site.register(Assignment, AssignmentAdmin)
 
-
-class OpenIDUserAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'email', 'user')
-
-if not settings.DJANGO_ADMIN_SSO_USE_OAUTH:
-    from .openid.models import OpenIDUser
-    admin.site.register(OpenIDUser, OpenIDUserAdmin)
 
 if settings.DJANGO_ADMIN_SSO_ADD_LOGIN_BUTTON:
     admin.site.login_template = 'admin_sso/login.html'

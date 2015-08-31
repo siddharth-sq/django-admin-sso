@@ -1,7 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
 
-from . import skipIfOpenID, skipIfOAuth
 from admin_sso.models import Assignment
 from admin_sso import settings
 
@@ -32,7 +31,6 @@ class FlowMock(object):
         return self.credentials
 
 
-@skipIfOpenID
 class OAuthViewTest(TestCase):
     def setUp(self):
         self.client = Client()
@@ -85,20 +83,3 @@ class OAuthViewTest(TestCase):
         self.assertFalse('_auth_user_id' in self.client.session)
         self.assertFalse('_auth_user_backend' in self.client.session)
         setattr(views, 'flow_override', None)
-
-
-@skipIfOAuth
-class OpenIDViewTest(TestCase):
-    def setUp(self):
-        self.client = Client()
-        self.user = User.objects.create(username='admin_sso')
-        self.assignment = Assignment.objects.create(username='',
-                                                    username_mode=settings.ASSIGNMENT_ANY,
-                                                    domain='example.com',
-                                                    user=self.user,
-                                                    weight=100)
-
-    def test_start_view(self):
-        start_url = reverse('admin:admin_sso_assignment_start')
-        rv = self.client.get(start_url)
-        self.assertContains(rv, settings.DJANGO_ADMIN_SSO_OPENID_ENDPOINT[:-2])

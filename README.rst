@@ -11,14 +11,18 @@ Django admin SSO
 .. image:: https://pypip.in/v/django-admin-sso/badge.png
     :target: https://pypi.python.org/pypi/django-admin-sso/
 
-Django admin SSO lets users login to a django admin using an OAuth2 or an
-openid provider. It then looks up the email address of the new user and looks
-up the rights for them.
+Django admin SSO lets users login to Django's administration panel using an
+OAuth2 provider instead of a username/password combination.
+
 
 Installation
 ------------
 
-1. Make sure you have a working django project setup.
+django-admin-sso is most often used with Google OAuth2 and the instructions
+follow that assumption. At least in theory it is possible to use a different
+OAuth2 provider.
+
+1. Make sure you have a working Django project setup.
 2. Install django-admin-sso using pip::
 
     pip install django-admin-sso
@@ -38,7 +42,7 @@ Installation
         'django.contrib.auth.backends.ModelBackend',
     )
 
-5. Insert your oauth client id and secret key into your settings file::
+5. Insert your OAuth2 client id and secret key into your settings file::
 
     DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID = 'your client id here'
     DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET = 'your client secret here'
@@ -49,9 +53,7 @@ new project, and create a new client ID under the menu point "APIs & AUTH",
 "Credentials". The redirect URI should be of the form
 ``http://example.com/admin/admin_sso/assignment/end/``
 
-If you don't specify a client id django-admin-sso will fallback to openid.
-
-6. Run syncdb to create the needed database tables.
+6. Run ``./manage.py migrate`` to create the needed database tables.
 
 7. Log into the admin and add an Assignment.
 
@@ -76,6 +78,12 @@ Remote User -> Local User
 
 Changelog
 ---------
+
+2.0
+~~~
+
+* Removed support for OpenID
+* Python 3 compatible
 
 1.0
 ~~~

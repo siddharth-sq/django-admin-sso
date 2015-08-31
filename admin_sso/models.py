@@ -50,7 +50,3 @@ class Assignment(models.Model):
         return u"%s(%s) @%s" % (dict(settings.ASSIGNMENT_CHOICES)[self.username_mode], self.username, self.domain)
 
     objects = AssignmentManager()
-
-
-if not settings.DJANGO_ADMIN_SSO_USE_OAUTH:
-    from .openid.models import OpenIDUser, Association, Nonce  # noqa

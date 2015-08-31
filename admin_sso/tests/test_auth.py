@@ -6,17 +6,9 @@ else:
     User = get_user_model()
 from django.utils import unittest
 
-from openid.consumer.consumer import SuccessResponse
-from openid.consumer.discover import OpenIDServiceEndpoint
-from openid.message import Message, OPENID2_NS
-
 from admin_sso import settings
 from admin_sso.auth import DjangoSSOAuthBackend
 from admin_sso.models import Assignment
-from . import skipIfOpenID, skipIfOAuth
-
-
-SREG_NS = "http://openid.net/sreg/1.0"
 
 
 class AuthModuleTests(unittest.TestCase):
@@ -37,24 +29,9 @@ class AuthModuleTests(unittest.TestCase):
         user = self.auth_module.authenticate()
         self.assertEqual(user, None)
 
-    @skipIfOpenID
     def test_simple_assignment(self):
         email = "foo@example.com"
         user = self.auth_module.authenticate(sso_email=email)
-        self.assertEqual(user, self.user)
-
-    def create_sreg_response(self, fullname='', email='', identifier=''):
-        message = Message(OPENID2_NS)
-        message.setArg(SREG_NS, "fullname", fullname)
-        message.setArg(SREG_NS, "email", email)
-        endpoint = OpenIDServiceEndpoint()
-        endpoint.display_identifier = identifier
-        return SuccessResponse(endpoint, message, signed_fields=message.toPostArgs().keys())
-
-    @skipIfOAuth
-    def test_domain_matches(self):
-        response = self.create_sreg_response(fullname="User Name", email="foo@example.com", identifier='7324')
-        user = self.auth_module.authenticate(openid_response=response)
         self.assertEqual(user, self.user)
 
     def test_get_user(self):
