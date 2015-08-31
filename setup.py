@@ -4,13 +4,13 @@ from setuptools import setup
 
 import admin_sso
 setup(
-    name='django-admin-sso',
+    name='django-admin-sso2',
     version=admin_sso.__version__,
     description='Django SSO solution',
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     author='Marc Egli',
     author_email='egli@allink.ch',
-    url='http://github.com/frog32/django-admin-sso/',
+    url='http://github.com/matthiask/django-admin-sso/',
     license='BSD License',
     platforms=['OS Independent'],
     packages=[
