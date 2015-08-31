@@ -19,9 +19,9 @@ follow that assumption. At least in theory it is possible to use a different
 OAuth2 provider.
 
 1. Make sure you have a working Django project setup.
-2. Install django-admin-sso using pip::
+2. Install django-admin-sso2 using pip::
 
-    pip install django-admin-sso
+    pip install django-admin-sso2
 
 3. Add ``admin_sso`` to ``INSTALLED_APPS`` in your ``settings.py`` file::
 
