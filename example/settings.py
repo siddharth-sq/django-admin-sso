@@ -119,5 +119,3 @@ LOGGING = {
         },
     }
 }
-
-TEST_RUNNER = 'admin_sso.tests.runner.TestRunner'

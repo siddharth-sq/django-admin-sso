@@ -6,7 +6,7 @@ import admin_sso
 setup(
     name='django-admin-sso',
     version=admin_sso.__version__,
-    description='django sso solution',
+    description='Django SSO solution',
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     author='Marc Egli',
     author_email='egli@allink.ch',
@@ -15,7 +15,7 @@ setup(
     platforms=['OS Independent'],
     packages=[
         'admin_sso',
-        'admin_sso.openid',
+        'admin_sso.migrations',
     ],
     # package_data={'admin_sso':'templates/*.html'},
     classifiers=[
@@ -29,7 +29,7 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
     install_requires=(
-        'Django>=1.4',
+        'Django>=1.7',
         'oauth2client>=1.2',
     ),
     include_package_data=True,

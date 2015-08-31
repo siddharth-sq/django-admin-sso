@@ -1,15 +1,12 @@
+from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
 
 from admin_sso.models import Assignment
 from admin_sso import settings
 
-try:
-    from django.contrib.auth import get_user_model
-except ImportError:  # django < 1.5
-    from django.contrib.auth.models import User
-else:
-    User = get_user_model()
+
+User = get_user_model()
 
 
 class CredentialsMock(object):

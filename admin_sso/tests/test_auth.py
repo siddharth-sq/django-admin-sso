@@ -1,14 +1,12 @@
-try:
-    from django.contrib.auth import get_user_model
-except ImportError:  # django < 1.5
-    from django.contrib.auth.models import User
-else:
-    User = get_user_model()
+from django.contrib.auth import get_user_model
 from django.utils import unittest
 
 from admin_sso import settings
 from admin_sso.auth import DjangoSSOAuthBackend
 from admin_sso.models import Assignment
+
+
+User = get_user_model()
 
 
 class AuthModuleTests(unittest.TestCase):
