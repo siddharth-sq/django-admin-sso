@@ -66,7 +66,7 @@ class OAuthViewTest(TestCase):
         rv = self.client.get(end_url + '?code=xxx')
         self.assertEqual(rv.status_code, 302)
         self.assertTrue('Location' in rv)
-        self.assertEqual(self.client.session['_auth_user_id'], str(self.user.id))
+        self.assertEqual(str(self.client.session['_auth_user_id']), str(self.user.id))
         self.assertEqual(self.client.session['_auth_user_backend'], 'admin_sso.auth.DjangoSSOAuthBackend')
         setattr(views, 'flow_override', None)
 
