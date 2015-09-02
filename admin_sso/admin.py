@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.contrib import admin
 
 from admin_sso import settings
@@ -11,20 +11,15 @@ class AssignmentAdmin(admin.ModelAdmin):
     list_editable = ('username', 'username_mode', 'domain', 'user', 'weight')
 
     def get_urls(self):
-        urls = super(AssignmentAdmin, self).get_urls()
-        opts = self.model._meta
-        try:
-            #  Django 1.8 only provides model_name
-            info = (opts.app_label, opts.model_name)
-        except AttributeError:
-            info = (opts.app_label, opts.module_name)
+        from admin_sso.views import start, end
 
-        return patterns('admin_sso.views',
-            url(r'^start/$', 'start',
+        info = (self.model._meta.app_label, self.model._meta.model_name)
+        return [
+            url(r'^start/$', start,
                 name='%s_%s_start' % info),
-            url(r'^end/$', 'end',
+            url(r'^end/$', end,
                 name='%s_%s_end' % info),
-        ) + urls
+        ] + super(AssignmentAdmin, self).get_urls()
 
 admin.site.register(Assignment, AssignmentAdmin)
 
