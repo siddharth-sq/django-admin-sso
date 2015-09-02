@@ -20,14 +20,13 @@ if settings.DJANGO_ADMIN_SSO_TOKEN_URI:
 if settings.DJANGO_ADMIN_SSO_REVOKE_URI:
     flow_kwargs['revoke_uri'] = settings.DJANGO_ADMIN_SSO_REVOKE_URI
 
-redirect_uri = ''  # set this after end view has been defined
-
 flow_override = None
 
 
 def start(request):
     flow = OAuth2WebServerFlow(
-        redirect_uri=request.build_absolute_uri(redirect_uri),
+        redirect_uri=request.build_absolute_uri(
+            reverse('admin:admin_sso_assignment_end')),
         **flow_kwargs)
 
     return HttpResponseRedirect(flow.step1_get_authorize_url())
@@ -36,7 +35,8 @@ def start(request):
 def end(request):
     if flow_override is None:
         flow = OAuth2WebServerFlow(
-            redirect_uri=request.build_absolute_uri(redirect_uri),
+            redirect_uri=request.build_absolute_uri(
+                reverse('admin:admin_sso_assignment_end')),
             **flow_kwargs)
     else:
         flow = flow_override
@@ -58,6 +58,3 @@ def end(request):
 
     # if anything fails redirect to admin:index
     return HttpResponseRedirect(reverse('admin:index'))
-
-
-redirect_uri = reverse('admin:admin_sso_assignment_end')
