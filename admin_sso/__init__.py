@@ -1,4 +1,4 @@
-VERSION = (2, 0, 2)
+VERSION = (2, 0, 3)
 __version__ = '.'.join(map(str, VERSION))
 
 default_app_config = 'admin_sso.apps.AdminSSOConfig'
