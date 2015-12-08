@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.utils import unittest
+from django.test import TestCase
 
 from admin_sso import settings
 from admin_sso.auth import DjangoSSOAuthBackend
@@ -9,7 +9,7 @@ from admin_sso.models import Assignment
 User = get_user_model()
 
 
-class AuthModuleTests(unittest.TestCase):
+class AuthModuleTests(TestCase):
     def setUp(self):
         self.auth_module = DjangoSSOAuthBackend()
         self.user = User.objects.create(username='admin_sso1')
@@ -40,7 +40,7 @@ class AuthModuleTests(unittest.TestCase):
         self.assertEqual(user, None)
 
 
-class AssignmentManagerTests(unittest.TestCase):
+class AssignmentManagerTests(TestCase):
     def setUp(self):
         self.user = User.objects.create(username='admin_sso1')
         self.assignment1 = Assignment.objects.create(username='',
