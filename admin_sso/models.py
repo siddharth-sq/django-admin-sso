@@ -39,7 +39,8 @@ class Assignment(models.Model):
     domain = models.CharField(max_length=255)
     copy = models.BooleanField(default=False)
     weight = models.PositiveIntegerField(default=0)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True,
+                             on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('Assignment')

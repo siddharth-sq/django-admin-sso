@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('domain', models.CharField(max_length=255)),
                 ('copy', models.BooleanField(default=False)),
                 ('weight', models.PositiveIntegerField(default=0)),
-                ('user', models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('user', models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('-weight',),
