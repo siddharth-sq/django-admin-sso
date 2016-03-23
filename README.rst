@@ -2,8 +2,6 @@
 Django admin SSO
 ================
 
-(Friendly fork, all credit should go to Marc Egli / frog32.)
-
 .. image:: https://travis-ci.org/matthiask/django-admin-sso.png?branch=master
     :target: https://travis-ci.org/matthiask/django-admin-sso
 
@@ -19,9 +17,9 @@ follow that assumption. At least in theory it is possible to use a different
 OAuth2 provider.
 
 1. Make sure you have a working Django project setup.
-2. Install django-admin-sso2 using pip::
+2. Install django-admin-sso using pip::
 
-    pip install django-admin-sso2
+    pip install django-admin-sso
 
 3. Add ``admin_sso`` to ``INSTALLED_APPS`` in your ``settings.py`` file::
 
@@ -80,6 +78,7 @@ Changelog
 
 * Removed support for OpenID
 * Python 3 compatible
+* Dropped support for Django versions older than 1.7
 
 1.0
 ~~~

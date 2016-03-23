@@ -4,7 +4,7 @@ from setuptools import setup
 
 import admin_sso
 setup(
-    name='django-admin-sso2',
+    name='django-admin-sso',
     version=admin_sso.__version__,
     description='Django SSO solution',
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
