@@ -73,12 +73,14 @@ Remote User -> Local User
 Changelog
 ---------
 
-2.0
+2.1
 ~~~
 
 * Removed support for OpenID
 * Python 3 compatible
 * Dropped support for Django versions older than 1.7
+* Continued development as ``django-admin-sso`` (2.0.x versions were released
+  independently as ``django-admin-sso2``)
 
 1.0
 ~~~
