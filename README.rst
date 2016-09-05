@@ -73,6 +73,12 @@ Remote User -> Local User
 Changelog
 ---------
 
+2.2
+~~~
+
+* Official support for Django 1.10 (no changes were necessary)
+* Made the admin panel usable on sites with many users.
+
 2.1
 ~~~
 

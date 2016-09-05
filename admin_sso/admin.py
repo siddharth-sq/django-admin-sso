@@ -1,15 +1,14 @@
 from django.conf.urls import url
 from django.contrib import admin
+from django.utils import six
 
 from admin_sso import settings
 from admin_sso.models import Assignment
 
 
 class AssignmentAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'username', 'username_mode', 'domain',
-                    'user', 'weight')
-    list_editable = ('username', 'username_mode', 'domain', 'user', 'weight')
-    raw_id_fields = ('user',)
+    list_display = ['__str__' if six.PY3 else '__unicode__', 'user', 'weight']
+    raw_id_fields = ['user']
 
     def get_urls(self):
         from admin_sso.views import start, end

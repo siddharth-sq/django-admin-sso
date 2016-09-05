@@ -1,5 +1,6 @@
 import fnmatch
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from admin_sso import settings
@@ -33,6 +34,7 @@ class AssignmentManager(models.Manager):
         return used_assignment
 
 
+@python_2_unicode_compatible
 class Assignment(models.Model):
     username_mode = models.IntegerField(choices=settings.ASSIGNMENT_CHOICES)
     username = models.CharField(max_length=255, blank=True)
@@ -43,11 +45,15 @@ class Assignment(models.Model):
                              on_delete=models.CASCADE)
 
     class Meta:
+        ordering = ('-weight',)
         verbose_name = _('Assignment')
         verbose_name_plural = _('Assignments')
-        ordering = ('-weight',)
 
-    def __unicode__(self):
-        return u"%s(%s) @%s" % (dict(settings.ASSIGNMENT_CHOICES)[self.username_mode], self.username, self.domain)
+    def __str__(self):
+        return "%s(%s) @%s" % (
+            dict(settings.ASSIGNMENT_CHOICES)[self.username_mode],
+            self.username,
+            self.domain,
+        )
 
     objects = AssignmentManager()
