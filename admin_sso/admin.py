@@ -9,6 +9,7 @@ class AssignmentAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'username', 'username_mode', 'domain',
                     'user', 'weight')
     list_editable = ('username', 'username_mode', 'domain', 'user', 'weight')
+    raw_id_fields = ('user',)
 
     def get_urls(self):
         from admin_sso.views import start, end
