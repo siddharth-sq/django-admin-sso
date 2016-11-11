@@ -1,6 +1,9 @@
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
+try:
+    from django.urls import reverse
+except ImportError:  # Django<1.10, pragma: no cover
+    from django.core.urlresolvers import reverse
 
 from admin_sso.models import Assignment
 from admin_sso import settings

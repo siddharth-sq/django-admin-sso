@@ -1,6 +1,9 @@
-from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
+try:
+    from django.urls import reverse
+except ImportError:  # Django<1.10, pragma: no cover
+    from django.core.urlresolvers import reverse
 
 from oauth2client.client import OAuth2WebServerFlow, FlowExchangeError
 
