@@ -73,6 +73,12 @@ Remote User -> Local User
 Changelog
 ---------
 
+2.3
+~~~
+
+* Raised the minimum supported Django version to the LTS version, 1.8.
+* Avoid deprecation warnings with Django 1.10.
+
 2.2
 ~~~
 
