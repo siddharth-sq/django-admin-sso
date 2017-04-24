@@ -73,6 +73,11 @@ Remote User -> Local User
 Changelog
 ---------
 
+2.4
+~~~
+
+* Official support for Django 1.11.
+
 2.3
 ~~~
 
