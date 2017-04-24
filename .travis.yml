@@ -3,12 +3,22 @@ sudo: false
 python:
   - "2.7"
   - "3.4"
+  - "3.6"
 env:
-  - DJANGO_VERSION="django>=1.8,<1.9"
-  - DJANGO_VERSION="django>=1.9,<1.10"
-  - DJANGO_VERSION="django>=1.10,<1.11"
+  - REQ="Django>=1.8,<1.9"
+  - REQ="Django>=1.9,<1.10"
+  - REQ="Django>=1.10,<1.11"
+  - REQ="Django>=1.11,<2.0"
+matrix:
+  exclude:
+    - python: "3.6"
+      env: REQ="Django>=1.8,<1.9"
+    - python: "3.6"
+      env: REQ="Django>=1.9,<1.10"
+    - python: "3.6"
+      env: REQ="Django>=1.10,<1.11"
 install:
-  - pip install $DJANGO_VERSION
+  - pip install $REQ
   - python setup.py install
   - pip install -r test_requirements.txt
   - pip install coveralls
