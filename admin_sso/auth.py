@@ -12,7 +12,7 @@ class DjangoSSOAuthBackend(object):
             return None
 
     def authenticate(self, request=None, **kwargs):
-        sso_email = kwargs.pop('sso_email', None)
+        sso_email = kwargs.pop("sso_email", None)
 
         assignment = Assignment.objects.for_email(sso_email)
         if assignment is None:

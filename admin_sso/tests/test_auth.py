@@ -12,12 +12,14 @@ User = get_user_model()
 class AuthModuleTests(TestCase):
     def setUp(self):
         self.auth_module = DjangoSSOAuthBackend()
-        self.user = User.objects.create(username='admin_sso1')
-        self.assignment1 = Assignment.objects.create(username='',
-                                                     username_mode=settings.ASSIGNMENT_ANY,
-                                                     domain='example.com',
-                                                     user=self.user,
-                                                     weight=100)
+        self.user = User.objects.create(username="admin_sso1")
+        self.assignment1 = Assignment.objects.create(
+            username="",
+            username_mode=settings.ASSIGNMENT_ANY,
+            domain="example.com",
+            user=self.user,
+            weight=100,
+        )
 
     def tearDown(self):
         self.user.delete()
@@ -42,22 +44,28 @@ class AuthModuleTests(TestCase):
 
 class AssignmentManagerTests(TestCase):
     def setUp(self):
-        self.user = User.objects.create(username='admin_sso1')
-        self.assignment1 = Assignment.objects.create(username='',
-                                                     username_mode=settings.ASSIGNMENT_ANY,
-                                                     domain='example.com',
-                                                     user=self.user,
-                                                     weight=100)
-        self.assignment2 = Assignment.objects.create(username='*bar',
-                                                     username_mode=settings.ASSIGNMENT_MATCH,
-                                                     domain='example.com',
-                                                     user=self.user,
-                                                     weight=200)
-        self.assignment3 = Assignment.objects.create(username='foo*',
-                                                     username_mode=settings.ASSIGNMENT_EXCEPT,
-                                                     domain='example.com',
-                                                     user=self.user,
-                                                     weight=300)
+        self.user = User.objects.create(username="admin_sso1")
+        self.assignment1 = Assignment.objects.create(
+            username="",
+            username_mode=settings.ASSIGNMENT_ANY,
+            domain="example.com",
+            user=self.user,
+            weight=100,
+        )
+        self.assignment2 = Assignment.objects.create(
+            username="*bar",
+            username_mode=settings.ASSIGNMENT_MATCH,
+            domain="example.com",
+            user=self.user,
+            weight=200,
+        )
+        self.assignment3 = Assignment.objects.create(
+            username="foo*",
+            username_mode=settings.ASSIGNMENT_EXCEPT,
+            domain="example.com",
+            user=self.user,
+            weight=300,
+        )
 
     def tearDown(self):
         self.user.delete()
@@ -69,7 +77,7 @@ class AssignmentManagerTests(TestCase):
         self.assertEqual(user, self.assignment1)
 
     def test_invalid_domain(self):
-        email = 'someone@someotherdomain.com'
+        email = "someone@someotherdomain.com"
         user = Assignment.objects.for_email(email)
         self.assertIsNone(user)
 
@@ -84,7 +92,7 @@ class AssignmentManagerTests(TestCase):
         self.assertEqual(user, self.assignment3)
 
     def test_invalid_email(self):
-        email = 'invalid'
+        email = "invalid"
         user = Assignment.objects.for_email(email)
         self.assertEqual(user, None)
 

@@ -73,6 +73,13 @@ Remote User -> Local User
 Changelog
 ---------
 
+3.0
+~~~
+
+* Dropped support for Django<1.11 and Python<3.
+* Modernized the package and reformatted the code using black.
+
+
 2.4
 ~~~
 
