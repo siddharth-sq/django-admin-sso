@@ -6,7 +6,9 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from admin_sso import settings
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 class AssignmentManager(models.Manager):
     def for_email(self, email):
