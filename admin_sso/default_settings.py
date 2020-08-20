@@ -5,10 +5,12 @@ from django.utils.translation import gettext_lazy as _
 ASSIGNMENT_ANY = 0
 ASSIGNMENT_MATCH = 1
 ASSIGNMENT_EXCEPT = 2
+ASSIGNMENT_MATCH_EMAIL = 3
 ASSIGNMENT_CHOICES = (
     (ASSIGNMENT_ANY, _("any")),
     (ASSIGNMENT_MATCH, _("matches")),
     (ASSIGNMENT_EXCEPT, _("don't match")),
+    (ASSIGNMENT_MATCH_EMAIL, _("match email")),
 )
 
 DJANGO_ADMIN_SSO_ADD_LOGIN_BUTTON = getattr(

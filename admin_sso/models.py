@@ -28,6 +28,9 @@ class AssignmentManager(models.Manager):
                 if not fnmatch.fnmatch(username, assignment.username):
                     used_assignment = assignment
                     break
+            elif assignment.username_mode == settings.ASSIGNMENT_MATCH_EMAIL:
+                assignment.user = User.objects.filter(email=email, is_staff=True).first()
+                used_assignment = assignment
         if used_assignment is None:
             return None
         return used_assignment
